@@ -1,0 +1,10 @@
+VAR flag
+VAR result
+
+$result = 0
+
+FOR $i = 0 TO 10 DO:
+   $result = $result + $i
+NEXT
+
+PRINT $result   

@@ -1,0 +1,5 @@
+5594.8 is correct for 4906631.0 / 877.0
+0.0 is correct for 99999.0 * 0.0
+1.0 is correct for 8.0 ^ 0.0
+0.0 is correct for 0.0 - 0.0
+1294977.0 is correct for 1294967.0 + 10.0

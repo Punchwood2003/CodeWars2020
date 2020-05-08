@@ -1,0 +1,7 @@
+1:10 Variable declared but not used
+7:20 Unexpected indentation
+10:30 Trailing whitespace
+19:20 Unexpected indentation
+19:40 Func declaration without documentation
+25:20 Unexpected indentation
+30:20 Unexpected indentation

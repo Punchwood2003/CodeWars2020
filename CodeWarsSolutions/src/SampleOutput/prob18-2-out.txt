@@ -1,0 +1,5 @@
+The angle between the Hour hand and Minute hand is 55.00 degrees.
+The angle between the Hour hand and Minute hand is 15.00 degrees.
+The angle between the Hour hand and Minute hand is 150.00 degrees.
+The angle between the Hour hand and Minute hand is 27.50 degrees.
+The angle between the Hour hand and Minute hand is 172.50 degrees.

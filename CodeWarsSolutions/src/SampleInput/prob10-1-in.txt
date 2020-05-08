@@ -1,0 +1,19 @@
+There once was a [AJ] [N] from [N] who [AV] [V] all day.
+NOUNS
+squirrel
+London
+tree
+lettuce
+ADVERBS
+silently
+quickly
+happily
+VERBS
+skipped
+ran
+climbs
+ADJECTIVES
+delightful
+homely
+quaint
+END

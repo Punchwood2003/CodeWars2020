@@ -1,0 +1,6 @@
+City X is neighbour to Cities Y,Z
+City Y is neighbour to Cities X,Z
+City Z is neighbour to Cities X,Y
+
+*JUDGE NOTE:
+This problem is targeted toward beginners. As such, judges are advised to be lenient. As long as the X is to Y,Z data points are correct, discrepencies in spelling, whitespace, case, and even formatting should be given a break

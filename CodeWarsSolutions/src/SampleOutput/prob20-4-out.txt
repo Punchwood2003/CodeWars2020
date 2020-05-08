@@ -1,0 +1,8 @@
+Pepperoni: 0
+Red Peppers: 0
+Pineapple: 168
+Olives: 60
+Sardines: 0
+Onion: 112
+Sausage: 0
+Ham: 0

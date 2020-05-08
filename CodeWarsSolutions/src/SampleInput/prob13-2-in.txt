@@ -1,0 +1,5 @@
+2100 4
+Camera 69555
+TV 76439
+iPhone 90000
+Stickers 2999

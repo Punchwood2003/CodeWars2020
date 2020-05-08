@@ -1,0 +1,4 @@
+500000 3
+Jacket 20000
+Laptop 450000
+Concert-Tickets 30000

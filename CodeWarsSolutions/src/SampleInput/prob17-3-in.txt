@@ -1,0 +1,9 @@
+4
+A
+B
+J
+K
+City A is connected to City B by train
+City B is connected to City J by road
+City J is connected to City A by road
+City K is connected to City A by air

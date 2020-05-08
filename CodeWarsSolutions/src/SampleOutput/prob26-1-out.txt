@@ -1,0 +1,12 @@
+there are 31 days remaining until 2019-02-01 01:01:01
+there are 745 hours remaining until 2019-02-01 01:01:01
+there are 44701 minutes remaining until 2019-02-01 01:01:01
+there are 2682061 seconds remaining until 2019-02-01 01:01:01
+there are 31 days 1 hours 1 minutes 1 seconds remaining until 2019-02-01 01:01:01
+there are 745 hours 1 minutes 1 seconds remaining until 2019-02-01 01:01:01
+there are 44701 minutes 1 seconds remaining until 2019-02-01 01:01:01
+there are 31 days 1 hours remaining until 2019-02-01 01:01:01
+there are 31 days 61 minutes remaining until 2019-02-01 01:01:01
+there are 31 days 3661 seconds remaining until 2019-02-01 01:01:01
+there are 745 hours 1 minutes remaining until 2019-02-01 01:01:01
+there are 745 hours 61 seconds remaining until 2019-02-01 01:01:01

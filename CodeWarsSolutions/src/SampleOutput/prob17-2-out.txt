@@ -1,0 +1,7 @@
+City X is neighbour to Cities Y,Z,B
+City Y is neighbour to Cities X,Z,B
+City Z is neighbour to Cities X,Y,B
+City A is remote and has no neighbours!
+City B is neighbour to Cities X,Y,Z
+City C is neighbour to Cities D
+City D is neighbour to Cities C

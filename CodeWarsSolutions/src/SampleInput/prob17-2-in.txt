@@ -1,0 +1,16 @@
+7
+X
+Y
+Z
+A
+B
+C
+D
+City X is connected to City Z by train
+City X is connected to City Y by air
+City A is connected to City C by air
+City Y is connected to City Z by road
+City Z is connected to City B by train
+City B is connected to City Y by road
+City C is connected to City D by road
+City D is connected to City C by train

@@ -1,0 +1,31 @@
+VAR flag
+VAR result
+
+$result = 0
+
+FOR $i = 0..10 DO:
+   $result = $result + $i
+NEXT
+
+PRINT $result   
+
+# myfunc1 is properly documented
+FUNC myfunc1( i )
+    RETURN i + 1
+ENDFUNC
+
+# this function is not properly documented,
+# and so there are two issues on the below line!
+ FUNC myfunc2( j )
+    RETURN j + 2
+ENDFUNC
+
+# tabs are not a valid way to indent
+IF 1 + 1 == 2 THEN:
+	PRINT "OK"
+ENDIF
+
+# another indentation error
+IF 1 + 1 != 2 THEN:
+PRINT "UT OH"
+ENDIF

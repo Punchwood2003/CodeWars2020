@@ -1,0 +1,8 @@
+Pepperoni: 304
+Red Peppers: 40
+Pineapple: 210
+Olives: 50
+Sardines: 6
+Onion: 70
+Sausage: 100
+Ham: 90

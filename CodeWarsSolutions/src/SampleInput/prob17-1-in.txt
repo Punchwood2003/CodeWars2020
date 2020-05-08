@@ -1,0 +1,7 @@
+3
+X
+Y
+Z
+City X is connected to City Y by train
+City Y is connected to City Z by air
+City Z is connected to City X by road

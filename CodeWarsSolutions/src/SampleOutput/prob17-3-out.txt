@@ -1,0 +1,4 @@
+City A is neighbour to Cities B,J
+City B is neighbour to Cities A,J
+City J is neighbour to Cities A,B
+City K is remote and has no neighbours!

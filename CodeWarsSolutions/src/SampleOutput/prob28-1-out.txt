@@ -1,0 +1,6 @@
+Geometric
+X^2
+X^3
+Fibonacci
+Geometric (With Gaps)
+8 3 82 17 9 is an Unknown series

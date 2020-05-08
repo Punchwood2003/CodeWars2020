@@ -1,0 +1,19 @@
+1 H 5 1 0
+2 V 4 3 0
+3 H 9 2 3
+4 V 6 5 3
+5 H 3 4 7
+-------
+3 0 P
+3 3 L
+5 3 A
+5 7 Y
+-------
+PICKLE
+APPLE
+WALRUS
+PEEL
+ALMAMATER
+COLLEGE
+ALWAYS
+AYE
