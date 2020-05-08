@@ -7,3 +7,13 @@ public class prob00 {
 		// i love luna
 	}
 }
+
+
+
+
+
+
+
+
+//challenge me 
+//ur mom is gay
