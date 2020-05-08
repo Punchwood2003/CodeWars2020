@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class BookemDanno
+public class prob04
 {
 	public static void main(String[] args)
 	{

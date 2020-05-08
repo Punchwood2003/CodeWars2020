@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class SodaTables
+public class prob03
 {
 	public static void main(String[] args)
 	{

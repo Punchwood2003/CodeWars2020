@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MirroredNumber
+public class prob02
 {
 	public static void main(String[]args)
 	{
