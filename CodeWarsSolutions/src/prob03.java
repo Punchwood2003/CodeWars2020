@@ -14,5 +14,6 @@ public class prob03
 				gcd = i;
 		}
 		System.out.println(gcd);
+		// @MatthewSheldon Ananya, make sure to fix the error about dividing by zero.
 	}
 }
