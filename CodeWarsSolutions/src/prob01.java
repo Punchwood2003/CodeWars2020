@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Harvey
+public class prob01
 {
 	public static void main(String[] args)
 	{
