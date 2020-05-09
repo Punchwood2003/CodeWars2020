@@ -12,12 +12,11 @@ public class prob06
 			String Martian = "";
 			if(Arabic / 100 >= 1)
 			{
-				if(Arabic == 9)
+				if(Arabic /100 == 9)
 					Martian += "BR";
 				else if(Arabic /100 ==4)
 					Martian += "BG";
-
-				else if(Arabic == 10)
+				else if(Arabic /100 == 10)
 					Martian += "R";
 				else
 				{
