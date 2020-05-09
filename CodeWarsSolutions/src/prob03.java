@@ -8,7 +8,7 @@ public class prob03
 		int one = s.nextInt();
 		int two = s.nextInt();
 		int gcd = 1;
-		for(int i  = 1; i < one && i < two; i ++)
+		for(int i  = 1; i <= one && i <= two; i ++)
 		{
 			if (one % i == 0 && two % i ==0)
 				gcd = i;
