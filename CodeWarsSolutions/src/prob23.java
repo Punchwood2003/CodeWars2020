@@ -1,6 +1,6 @@
+// author@MatthewSheldon
 import java.util.Scanner;
 
-// author@MatthewSheldon
 public class prob23 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
