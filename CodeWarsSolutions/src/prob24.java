@@ -1,44 +1,44 @@
 //author@MatthewSheldon
 /*
  * ToDo: add the ability to incorporate fixed characters
- * 		 check to see if the program is just running or if it
- * 		 is in an infinite loop.
+ * 		 
  */
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class prob24 {
+	// This object keeps track of the possible words to fill the object board
+	public Letter[][] currentWords;
+	
+	// This object keeps track of all of the indexes of the spaces as well as the length and orientation.
+	public ArrayList<Index> indexes;
+	
 	private int numSpaces;
-	public int[][] board;
 	public boolean[] usedWords;
 	public String[] words;
-	public Letter[][] currentWords;
 	public ArrayList<String> finalWords;
 	public ArrayList<Integer> finalWordNumbers;
-	public static final int SOLID = -1000;
-	public static final int BLANK = -2000;
 	
 	/*
 	 * This constructor creates an object with access to the current board,
 	 * the list of words available and the number of words that are needed
 	 * to fill up the board.
 	 */
-	public prob24(int[][] board, String[] words, int numSpaces) {
+	public prob24(String[] words, int numSpaces, ArrayList<Index> indexes, ArrayList<Letter> confirmedLetters) {
 		this.words = new String[words.length];
 		System.arraycopy(words, 0, this.words, 0, words.length);
 
+		this.indexes = indexes;
 		this.usedWords = new boolean[words.length];
 
-		this.board = new int[11][11];
-
-		for (int i = 0; i < 11; i++) {
-			for (int j = 0; j < 11; j++) {
-				this.board[i][j] = board[i][j];
-			}
-		}
 
 		this.currentWords = new Letter[11][11];
 
+		for(int i = 0 ; i < confirmedLetters.size(); i++) {
+			int[] cords = confirmedLetters.get(i).cord;
+			currentWords[cords[0]][cords[1]] = confirmedLetters.get(i);
+		}
+		
 		this.numSpaces = numSpaces;
 		
 		finalWords = new ArrayList<String>();
@@ -47,60 +47,24 @@ public class prob24 {
 	
 	/*
 	 * This method returns the starting position for a given
-	 * word number on the board.
+	 * word number on the board. References the new object
+	 * of the list of Index objects
 	 */
 	private int[] getSpaceStart(int spaceNumber) {
-        for (int i = 0; i < 11; i++) {
-            for (int j = 0; j < 11; j++) {
-                if (board[i][j] == BLANK || board[i][j] == SOLID) {
-                    continue;
-                }
-                if (Math.abs(board[i][j]) == spaceNumber) {
-                    int[] arr = {i, j};
-                    return arr;
-                }
-            }
-        }
-        return null;
-    }
+		for(int i = 0; i < indexes.size(); i++) {
+			if(Math.abs(indexes.get(i).wordIndex) == spaceNumber) {
+				return indexes.get(i).cords;
+			}
+		} 
+		return null;
+	}
 	
 	/*
 	 * Returns the total size of the current blank that 
 	 * we are trying to fit a word into. 
 	 */
 	public int getSpaceSize(int spaceNumber) {
-        int[] spaceCoord = getSpaceStart(spaceNumber);
-
-        int row = spaceCoord[0];
-        int col = spaceCoord[1];
-
-        boolean isAcross = board[row][col] > 0;
-
-        int limit;
-
-        if (isAcross) {
-            limit = board[0].length - col;
-        } 
-        else {
-            limit = board.length - row;
-        }
-
-        /*
-         * In the for loop below, we break if we reach a SOLID index before
-         * reaching the edge of the board.
-         */
-        int i;
-        for (i = 0; i < limit; i++) {
-            if(isAcross && board[row][col + i] == SOLID) {
-                break;
-            }
-
-            if (!isAcross && board[row + i][col] == SOLID) {
-                break;
-            }
-        }
-
-        return i;
+		return this.indexes.get(spaceNumber-1).length;
     }
 	
 	/*
@@ -114,7 +78,8 @@ public class prob24 {
         int col = spaceCoord[1];
 
         int spaceSize = getSpaceSize(spaceNumber);
-        boolean isAcross = board[row][col] > 0;
+        
+        boolean isAcross = this.indexes.get(spaceNumber-1).wordIndex > 0;
         String word = words[wordIndex];
 
         for(int i = 0; i < spaceSize; i++) {
@@ -122,9 +87,10 @@ public class prob24 {
                 return false;
             }
 
-            if (isAcross) {
+            if(isAcross) {
                 col += 1;
-            } else {
+            } 
+            else {
                 row += 1;
             }
         }
@@ -157,12 +123,12 @@ public class prob24 {
 		int col = spaceCoord[1];
 
 		int spaceSize = getSpaceSize(spaceNumber);
-		boolean isAcross = board[row][col] > 0;
+		boolean isAcross = this.indexes.get(spaceNumber-1).wordIndex > 0;
 
 		Letter[] ltrs = Letter.lettersFromString(words[wordIndex], wordIndex);
 
 		for(int i = 0; i < spaceSize; i++) {
-			if(currentWords[row][col] == null) {
+			if(currentWords[row][col] == null || (!currentWords[row][col].set && currentWords[row][col].character == ltrs[i].character)) {
 				currentWords[row][col] = ltrs[i];
 			}
 
@@ -192,10 +158,10 @@ public class prob24 {
         int col = spaceCoord[1];
 
         int spaceSize = getSpaceSize(spaceNumber);
-        boolean isAcross = board[row][col] > 0;
+        boolean isAcross = this.indexes.get(spaceNumber-1).wordIndex > 0;
 
         for (int i = 0; i < spaceSize; i++) {
-            if(currentWords[row][col] != null && currentWords[row][col].wordIndex == wordIndex) {
+            if((currentWords[row][col] != null && !currentWords[row][col].set) && currentWords[row][col].wordIndex == wordIndex) {
                 currentWords[row][col] = null;
             }
 
@@ -214,11 +180,11 @@ public class prob24 {
 	/*
 	 * Recursive method that will find the solutions to the crossword puzzle.
 	 */
-	private void findSolutions(int spaceNumber) {
+	private boolean findSolutions(int spaceNumber) {
         if(spaceNumber > numSpaces) {
             // all the spaces have been filled!
             displaySolution();
-            return;
+            return false;
         }
 
         /*
@@ -234,50 +200,39 @@ public class prob24 {
 
                 applyValue(wordIndex, spaceNumber);
 
-                findSolutions(spaceNumber + 1);
-
+                if(!findSolutions(spaceNumber + 1)) {
+                	return false;
+                }
                 removeValue(wordIndex, spaceNumber);
             }
         }
+        return true;
     }
 	
 	public void displaySolution() {
 		for(int i = 0; i < finalWords.size(); i++) {
 			int index = finalWordNumbers.indexOf((Integer) (i+1));
-			System.out.println(String.format("%02d is %s", index, finalWords.get(index)));
+			System.out.println(String.format("%02d is %s", index+1, finalWords.get(index)));
 		}
 	}
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		/*
-		 *  Create a blank canvas of an 11 x 11 board prior to filling in indexes. 
-		 *  Use SOLID because that way we don't have to fill in the SOLID Spaces
-		 */
-		int[][] board = { {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 				
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID}, 
-						  {SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID, SOLID} };
+		ArrayList<Index> indexes = new ArrayList<Index>();
 		
 		/*
 		 * First loop will instantiate the board into a working condition.
 		 */
 		String line = scan.nextLine();
+		int numSpaces = 0;
 		while(!line.equals("-------")) {
 			Scanner temp = new Scanner(line);
 			
 			int wordNumber = temp.nextInt();
 			char orientation = temp.next().charAt(0);
 			int len = temp.nextInt();
-			int x = temp.nextInt();
 			int y = temp.nextInt();
+			int x = temp.nextInt();
 
 			/*
 			 * Populate the board with the indexes of the 
@@ -287,24 +242,15 @@ public class prob24 {
 			 * orientation == 'V' 
 			 */
 			if(orientation == 'V') {
-				board[x][y] = -1 * wordNumber;
-				for(int i = 1; i < len-1; i++) {
-					if(board[x][y+i] == SOLID) {
-						board[x][y+i] = BLANK;
-					}
-				}
+				indexes.add(new Index(x, y, len, (-1 * wordNumber)));
 			}
 			else {
-				board[x][y] = wordNumber;
-				for(int i = 1; i < len-1; i++) {
-					if(board[x][y+i] == SOLID) {
-						board[x+i][y] = BLANK;
-					}
-				}
+				indexes.add(new Index(x, y, len, wordNumber));
 			}
+			numSpaces++;
 
 			line = scan.nextLine();
-		} 
+		}
 
 		/*
 		 * Second loop adds confirmed letters into the board
@@ -313,10 +259,11 @@ public class prob24 {
 		ArrayList<Letter> confirmedLetters = new ArrayList<Letter>();
 		while(!line.equals("-------")) {
 			Scanner temp = new Scanner(line);
-			int x = temp.nextInt();
 			int y = temp.nextInt();
+			int x = temp.nextInt();
 			char letter = temp.next().charAt(0);
-			
+			confirmedLetters.add(new Letter(letter, x, y));
+			line = scan.nextLine();
 		}
 
 		/*
@@ -327,18 +274,33 @@ public class prob24 {
 		while(scan.hasNextLine()) {
 			possibleWords.add(scan.nextLine());
 		}
-		String[] words = (String[]) possibleWords.toArray();
-		prob24 crossWordPuzzle = new prob24(board, words, words.length);
+		String[] words = new String[possibleWords.size()]; 
+		for(int i = 0; i < possibleWords.size(); i++) {
+			words[i] = possibleWords.get(i);
+		}
+		
+		
+		prob24 crossWordPuzzle = new prob24(words, numSpaces, indexes, confirmedLetters);
 		crossWordPuzzle.findSolutions(1);
 	}
 }
 class Letter {
 	public int wordIndex;
 	public char character;
-
+	public boolean set;
+	public int[] cord;
+	
 	public Letter(int wordIndex, char ch) {
 		this.wordIndex = wordIndex;
 		this.character = ch;
+		this.set = false;
+	}
+	public Letter(char ch, int x, int y) {
+		this.character = ch;
+		this.wordIndex = 0;
+		this.set = true;
+		int[] cord = {x, y};
+		this.cord = cord;
 	}
 	public static Letter[] lettersFromString(String str, int wordIndex) {
 		Letter[] letters = new Letter[str.length()];
@@ -347,5 +309,16 @@ class Letter {
 		}
 
 		return letters;
+	}
+}
+class Index {
+	public int wordIndex;
+	public int length;
+	public int[] cords;
+	public Index(int x, int y, int len, int index) {
+		this.wordIndex = index;
+		this.length = len;
+		int[] cords = {x, y};
+		this.cords = cords;
 	}
 }
