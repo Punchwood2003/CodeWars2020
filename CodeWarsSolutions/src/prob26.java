@@ -1,5 +1,6 @@
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+// author@MatthewSheldon
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 
 public class prob26 {
@@ -27,7 +28,7 @@ class CountDown {
 	public int year1, year2, month1, month2, day1, day2, 
 	hour1, hour2, minutes1, minutes2, seconds1, seconds2;
 	public String code;
-	public Calendar date1, date2;
+	public LocalDateTime date1, date2;
 	public CountDown(String year1, String year2, String month1, String month2, String day1, String day2, String hour1, String hour2, String minutes1, String minutes2, String seconds1, String seconds2, String code) {
 		this.year1 = Integer.parseInt(year1); 
 		this.year2 = Integer.parseInt(year2);
@@ -42,11 +43,9 @@ class CountDown {
 		this.seconds1 = Integer.parseInt(seconds1); 
 		this.seconds2 = Integer.parseInt(seconds2);
 		
-		this.date1 = Calendar.getInstance();
-		this.date2 = Calendar.getInstance();
-		this.date1.set(this.year1, this.month1, this.day1);
-		this.date2.set(this.year2, this.month2, this.day2);
-		
+		this.date1 = LocalDateTime.of(this.year1, this.month1, this.day1, this.hour1, this.minutes1, this.seconds1);
+		this.date2 = LocalDateTime.of(this.year2, this.month2, this.day2, this.hour2, this.minutes2, this.seconds2);
+				
 		this.code = code;
 	}
 	public void printTimeLeft() {
@@ -102,33 +101,31 @@ class CountDown {
 		}
 	}
 	public void printD() {
-		System.out.println(date2.getTimeInMillis() + " " + date1.getTimeInMillis());
-		
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long days = milliseconds / 86400000;
 		milliseconds -= days * 86400000;
 		System.out.println("there are " + days + " days remaining until " + printEndDate());
 	}
 	public void printH() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long hours = milliseconds / 3600000;
 		milliseconds -= hours * 3600000;
 		System.out.println("there are " + hours + " hours remaining until " + printEndDate());
 	}
 	public void printM() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long minutes = milliseconds / 60000;
 		milliseconds -= minutes * 60000;
 		System.out.println("there are " + minutes + " minutes remaining until " + printEndDate());
 	}
 	public void printS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long seconds = milliseconds / 1000;
 		milliseconds -= seconds * 1000;
 		System.out.println("there are " + seconds + " seconds remaining until " + printEndDate());
 	}
 	public void printDHMS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long days = milliseconds / 86400000;
 		milliseconds -= days * 86400000;
 		long hours = milliseconds / 3600000;
@@ -140,7 +137,7 @@ class CountDown {
 		System.out.println("there are " + days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds remaining until " + printEndDate());
 	}
 	public void printHMS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long hours = milliseconds / 3600000;
 		milliseconds -= hours * 3600000;
 		long minutes = milliseconds / 60000;
@@ -150,7 +147,7 @@ class CountDown {
 		System.out.println("there are " + hours + " hours " + minutes + " minutes " + seconds + " seconds remaining until " + printEndDate());
 	}
 	public void printMS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long minutes = milliseconds / 60000;
 		milliseconds -= minutes * 60000;
 		long seconds = milliseconds / 1000;
@@ -158,15 +155,15 @@ class CountDown {
 		System.out.println("there are " + minutes + " minutes " + seconds + " seconds remaining until " + printEndDate());
 	}
 	public void printDH() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long days = milliseconds / 86400000;
 		milliseconds -= days * 86400000;
 		long hours = milliseconds / 3600000;
 		milliseconds -= hours * 3600000;
-		System.out.println("there are " + days + " days " + hours + " hours seconds remaining until " + printEndDate());
+		System.out.println("there are " + days + " days " + hours + " hours remaining until " + printEndDate());
 	}
 	public void printDM() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long days = milliseconds / 86400000;
 		milliseconds -= days * 86400000;
 		long minutes = milliseconds / 60000;
@@ -174,7 +171,7 @@ class CountDown {
 		System.out.println("there are " + days + " days " + minutes + " minutes remaining until " + printEndDate());
 	}
 	public void printDS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long days = milliseconds / 86400000;
 		milliseconds -= days * 86400000;
 		long seconds = milliseconds / 1000;
@@ -182,7 +179,7 @@ class CountDown {
 		System.out.println("there are " + days + " days " + seconds + " seconds remaining until " + printEndDate());
 	}
 	public void printHM() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long hours = milliseconds / 3600000;
 		milliseconds -= hours * 3600000;
 		long minutes = milliseconds / 60000;
@@ -190,7 +187,7 @@ class CountDown {
 		System.out.println("there are " + hours + " hours " + minutes + " minutes remaining until " + printEndDate());
 	}
 	public void printHS() {
-		long milliseconds = (date2.getTimeInMillis() + (this.hour2 * 3600000) + (this.minutes2 * 60000) + (this.seconds2 * 1000)) - (date1.getTimeInMillis()  + (this.hour1 * 3600000) + (this.minutes1 * 60000) + (this.seconds1 * 1000));
+		long milliseconds = ChronoUnit.MILLIS.between(this.date1, this.date2);
 		long hours = milliseconds / 3600000;
 		milliseconds -= hours * 3600000;
 		long seconds = milliseconds / 1000;
