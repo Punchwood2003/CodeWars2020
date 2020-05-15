@@ -1,3 +1,4 @@
+// author@MatthewSheldon
 // ToDo: add the patterns for all of the rhyming schemes
 import java.util.ArrayList;
 import java.util.Scanner;
