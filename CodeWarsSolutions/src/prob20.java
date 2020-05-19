@@ -1,4 +1,5 @@
 // author@MatthewSheldon
+// ToDo : Fix the issue with Olives/Olive and Combos inclusion of Olives
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -116,7 +117,7 @@ public class prob20 {
 				orderToppings.add(tempTopping);
 				break;
 			}
-			case "Olive" : {
+			case "Olives" : {
 				Topping tempTopping = new Topping("Olives", (int) (multiplier * 20.0));
 				orderToppings.add(tempTopping);
 				break;

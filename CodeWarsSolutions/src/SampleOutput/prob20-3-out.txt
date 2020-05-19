@@ -1,5 +1,5 @@
 Pepperoni: 32
-Red Peppers: 40
+Red Peppers: 48
 Pineapple: 252
 Olives: 50
 Sardines: 36
