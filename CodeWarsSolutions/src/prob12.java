@@ -18,7 +18,7 @@ public class prob12
 			else
 				sumInches = (Integer.parseInt(nums[0])*36);
 			sumInches *= 2.54;
-			System.out.printf("%.2f",sumInches);
+			System.out.printf("%.2f\n",sumInches);
 
 		}
 
