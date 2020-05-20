@@ -42,11 +42,11 @@ public class prob16
 			
 			if(answer == guess)
 			{
-				System.out.printf(guess + " is correct for " + statement);
+				System.out.printf(guess + " is correct for " + statement + "\n");
 			}
 			else
 			{
-				System.out.printf(statement + " = " + "%.1f" + ", not " + guess, answer);
+				System.out.printf(statement + " = " + "%.1f" + ", not " + guess + "\n", answer);
 			}
 		}	
 	}
